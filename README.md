@@ -1,56 +1,50 @@
-Testes de Cadastro e Login - BugBank
+# Testes Automatizados - BugBank
 
-Este repositório contém testes automatizados para o aplicativo BugBank, focando no cadastro de contas com e sem saldo, bem como no processo de login em ambas as formas
+Este repositório contém testes automatizados criados para o aplicativo bancário fictício [BugBank](https://bugbank.netlify.app/), utilizando Cypress.  
+Os testes validam os fluxos de cadastro (com e sem saldo), login e transferência entre contas.
 
- Estrutura dos Testes
+---
 
-Os testes estão organizados em dois grupos principais:
+## Estrutura dos Testes
+
+Os testes estão organizados em dois arquivos principais:
 
 ### 1. Cadastro de Conta Sem Saldo
+Fluxo coberto:
+- Acesso à página do BugBank
+- Preenchimento dos campos de cadastro (e-mail, nome, senha e confirmação)
+- Cadastro de conta sem saldo
+- Login e validação da visibilidade do saldo (esperado: R$ 0,00)
+  
+### 2. Cadastro de Conta Com Saldo e Transferência
+Fluxo coberto:
+- Acesso à página do BugBank
+- Preenchimento dos campos de cadastro
+- Seleção da opção de conta com saldo
+- Login
+- Realização de transferência para outra conta
+- Validação da operação
 
-Este teste verifica o fluxo de cadastro de um usuário sem saldo. As etapas incluem:
+---
 
-- Acessar a página do BugBank.
-- Preencher os campos de e-mail, nome, senha e confirmação de senha.
-- Clicar no botão de cadastro.
-- Realizar o login e validar a visibilidade do saldo (que deve ser zero).
+## Observações Técnicas
 
-```js
-describe('Cadastro de conta sem saldo', () => {
-  before(() => {
-    cy.visit('https://bugbank.netlify.app/');
-  });
+Os testes foram divididos dessa forma porque o BugBank não salva os dados cadastrados entre sessões.  
+Por isso, cada teste executa o processo completo de criação e login em conta, sem depender de dados anteriores.
 
-  it('Cadastro sem saldo', () => {
-    // Código do teste...
-  });
-});
-```
+---
 
- 2. Cadastro de Conta Com Saldo
+## Tecnologias Utilizadas
 
-Este teste verifica o fluxo de cadastro de um usuário com saldo. As etapas incluem:
+- Cypress
+- JavaScript
+- Git e GitHub
+- SQL (básico)
+- Jira (para acompanhamento do andamento dos testes e documentação)
+---
 
-- Acessar a página do BugBank.
-- Preencher os campos de e-mail, nome, senha e confirmação de senha.
-- Selecionar a opção para criar uma conta com saldo.
-- Clicar no botão de cadastro.
-- Realizar o login e validar a visibilidade do saldo.
-- Efetuar uma transferência para outra conta.
+## Sobre
 
-```js
-describe('Cadastro de conta com saldo', () => {
-  before(() => {
-    cy.visit('https://bugbank.netlify.app/');
-  });
+Meu nome é Alana Freitas e atuo como Analista de Qualidade de Software, com foco em testes manuais e automatizados.  
+Gosto de entregar testes bem estruturados, que ajudem a garantir a qualidade do produto e contribuam para um desenvolvimento mais seguro.
 
-  it('Cadastro e login de usuário', () => {
-    // Código do teste...
-  });
-});
-```
-Esses são alguns testes que asseguram que os processos de cadastro e login operem de maneira eficaz, tanto para contas com saldo quanto para contas sem saldo. 
-Foram divididos da maneira atual pois, nesse caso não seria possivel dividir os testes em specs diferentes já que o site usado para teste não salva as informações previamente cadastradas
-Sendo assim, seria necessário executar 1 unico login, caso existisse mais de um, as informações antigas se perderiam. 
-A automação dos testes não apenas acelera a verificação de funcionalidades, mas também aumenta a confiabilidade do aplicativo, 
-permitindo uma detecção precoce de falhas e assegurando uma experiência de usuário de alta qualidade.
